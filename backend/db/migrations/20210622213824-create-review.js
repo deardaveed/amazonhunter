@@ -8,13 +8,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.INTEGER
+			userId: {
+				allowNull: false,
+				type: Sequelize.INTEGER,
+				references: { model: 'Users' }
       },
-      productId: {
-        type: Sequelize.INTEGER
+			productId: {
+				allowNull: false,
+				type: Sequelize.INTEGER,
+				references: { model: 'Products' }
       },
-      review: {
+			review: {
+				allowNull: false,
         type: Sequelize.TEXT
       },
       createdAt: {

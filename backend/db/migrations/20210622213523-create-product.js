@@ -8,28 +8,36 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerId: {
-        type: Sequelize.INTEGER
+			ownerId: {
+				allowNull: false,
+				type: Sequelize.INTEGER,
+				references: { model: 'Users' }
       },
-      title: {
+			title: {
+				allowNull: false,
         type: Sequelize.STRING
       },
-      imageUrl: {
+			imageUrl: {
+				allowNull: false,
         type: Sequelize.STRING
       },
-      productUrl: {
+			productUrl: {
+				allowNull: false,
         type: Sequelize.STRING
       },
-      description: {
+			description: {
+				allowNull: false,
         type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+				type: Sequelize.DATE,
+				defaultValue: Sequelize.fn('now')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+				type: Sequelize.DATE,
+				defaultValue: Sequelize.fn('now')
       }
     });
   },
