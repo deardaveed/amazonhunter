@@ -1,4 +1,6 @@
 'use strict';
+const faker = require("faker");
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Reviews', {
@@ -23,12 +25,16 @@ module.exports = {
         type: Sequelize.TEXT
       },
       createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        allowNull: true,
+				type: Sequelize.DATE,
+				// defaultValue: faker.date.past(),
+				// defaultValue: Sequelize.fn('now')
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        allowNull: true,
+				type: Sequelize.DATE,
+				// defaultValue: faker.date.recent(),
+				// defaultValue: Sequelize.fn('now')
       }
     });
   },
