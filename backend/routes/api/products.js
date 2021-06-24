@@ -25,10 +25,9 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 
 //! add new product to database
 // router.post('/add', asyncHandler(async (req, res) => {
-// 	const { ownerId, title, imageUrl, productUrl, description } = req.body;
+// 	const { title, imageUrl, productUrl, description } = req.body;
 
 // 	const product = await Product.create({
-// 		ownerId,		//this probably needs to be reworked
 // 		title,
 // 		imageUrl,
 // 		productUrl,
@@ -41,13 +40,12 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 //! update a specific product
 // router.put('/update/:id(\\d+)', asyncHandler(async (req, res) => {
 // 	const productId = +(req.params.id);
-// 	const { ownerId, title, imageUrl, productUrl, description } = req.body;
+// 	const { title, imageUrl, productUrl, description } = req.body;
 // 	const product = await Product.findOne({
 // 		where: { id: productId }
 // 	});
 
 // 	await product.update({
-// 		ownerId,		//do we really want this to be updatable?
 // 		title,
 // 		imageUrl,
 // 		productUrl,
@@ -58,7 +56,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 // }));
 
 //! delete a specific product
-// router.delete('/:id(\\d)', asyncHandler(async (req, res) => {
+// router.delete('delete/:id(\\d)', asyncHandler(async (req, res) => {
 // 	const productId = +(req.params.id);
 // 	const product = await Product.findByPk(productId);
 
