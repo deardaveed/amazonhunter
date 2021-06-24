@@ -5,7 +5,7 @@ const apiRouter = require('./api');
 
 router.use('/api', apiRouter);
 
-// ... after `router.use('/api', apiRouter);`
+// place after `router.use('/api', apiRouter);`
 
 // Static routes
 // Serve React build files in production
@@ -38,8 +38,6 @@ if (process.env.NODE_ENV !== 'production') {
     res.status(201).json({});
   });
 }
-
-module.exports = router;
 
 //! used for testing
 // router.get('/hello/world', function(req, res) {
