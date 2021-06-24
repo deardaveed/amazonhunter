@@ -8,12 +8,15 @@ const router = express.Router();
 
 // grab all associated data pertaining to products
 router.get('/', asyncHandler(async (req, res) => {
+	// res.cookie('XSRF-TOKEN', req.csrfToken());
+	// res.send("Hello from /");
 	const products = await Product.findAll();
 	return res.json(products);	//left optional explicit return for readability
 }));
 
 // grab one DB entry for a single product
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
+	// res.send("Hello from /:id")
 	const productId  = +(req.params.id); //convert str to int, in lieu of parseInt() or Number()
 	// productId = +productId;
 	const product = await Product.findByPk(productId) //! Did we need parseInt(id, 10) here?
