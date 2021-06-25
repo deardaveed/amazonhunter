@@ -50,7 +50,7 @@ export const setProducts = () => async (dispatch) => {
 	const products = await response.json();
 
 	if (response.ok) {
-		console.log('*****products (plural) *****', products);
+		// console.log('*****products (plural) *****', products);
 		dispatch(getProducts(products));
 	}
 };
@@ -132,7 +132,8 @@ const productsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_PRODUCTS:
 			const allProducts = {};
-			action.products.forEach((product) => {
+			// console.log("******REDUCER*****", action.payload);
+			action.payload.forEach((product) => {
 				allProducts[product.id] = product;
 			});
 
