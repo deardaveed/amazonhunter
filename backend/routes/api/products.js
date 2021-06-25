@@ -24,18 +24,18 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 }));
 
 //! add new product to database
-// router.post('/add', asyncHandler(async (req, res) => {
-// 	const { title, imageUrl, productUrl, description } = req.body;
+router.post('/add', asyncHandler(async (req, res) => {
+	const { title, imageUrl, productUrl, description } = req.body;
 
-// 	const product = await Product.create({
-// 		title,
-// 		imageUrl,
-// 		productUrl,
-// 		description
-// 	});
+	const product = await Product.create({
+		title,
+		imageUrl,
+		productUrl,
+		description
+	});
 
-// 	return res.json(product);
-// }));
+	return res.json(product);
+}));
 
 //! update a specific product
 // router.put('/update/:id(\\d+)', asyncHandler(async (req, res) => {

@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 //TODO Define Action Types as Constants
 const GET_PRODUCTS = "products/GET_PRODUCTS";
 // const GET_PRODUCT = "products/GET_PRODUCT";
-// const ADD_PRODUCT = "products/ADD_PRODUCT";
+const ADD_PRODUCT = "products/ADD_PRODUCT";
 // const UPDATE_PRODUCT = "products/EDIT_PRODUCT";
 // const DELETE_PRODUCT = "products/DELETE_PRODUCT";
 
@@ -22,12 +22,12 @@ const getProducts = (products) => {
 // 	}
 // };
 
-// const addProduct = (product) => {
-// 	return {
-// 		type: ADD_PRODUCT,
-// 		payload: product
-// 	}
-// };
+const addProduct = (product) => {
+	return {
+		type: ADD_PRODUCT,
+		payload: product
+	}
+};
 
 // const updateProduct = (product) => {
 // 	return {
@@ -67,26 +67,26 @@ export const setProducts = () => async (dispatch) => {
 // };
 
 // //! ADD A PRODUCT
-// export const newProduct = (product) => async (dispatch) => {
-// 	const { title, imageUrl, productUrl, description } = product;
+export const newProduct = (product) => async (dispatch) => {
+	const { title, imageUrl, productUrl, description } = product;
 
-// 	const response = await csrfFetch(`/api/products/add`, {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 		body: JSON.stringify({
-// 			title,
-// 			imageUrl,
-// 			productUrl,
-// 			description
-// 		})
-// 	});
+	const response = await csrfFetch(`/api/products/add`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			title,
+			imageUrl,
+			productUrl,
+			description
+		})
+	});
 
-// 	const data = await response.json();
-// 	dispatch(addProduct(data));
-// 	return response;
-// };
+	const data = await response.json();
+	dispatch(addProduct(data));
+	return response;
+};
 
 // //! UPDATE A PRODUCT
 // export const editProduct = (product) => async (dispatch) => {

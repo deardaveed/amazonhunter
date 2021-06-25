@@ -20,8 +20,8 @@ function Homepage() {
 				<tbody>
 					<tr>
 						{products.map((product) => {
-							return <td key={`${product.id}`}>{product.title}</td>
-						})};
+							return <div key={`${product.id}`}>{product.title}</div>
+						})}
 					</tr>
         </tbody>
 			</table>
