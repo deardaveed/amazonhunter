@@ -2,10 +2,10 @@ import { csrfFetch } from "./csrf";
 
 //TODO Define Action Types as Constants
 const GET_PRODUCTS = "products/GET_PRODUCTS";
-const GET_PRODUCT = "products/GET_PRODUCT";
-const ADD_PRODUCT = "products/ADD_PRODUCT";
-const UPDATE_PRODUCT = "products/EDIT_PRODUCT";
-const DELETE_PRODUCT = "products/DELETE_PRODUCT";
+// const GET_PRODUCT = "products/GET_PRODUCT";
+// const ADD_PRODUCT = "products/ADD_PRODUCT";
+// const UPDATE_PRODUCT = "products/EDIT_PRODUCT";
+// const DELETE_PRODUCT = "products/DELETE_PRODUCT";
 
 //TODO Define Action Creators
 const getProducts = (products) => {
