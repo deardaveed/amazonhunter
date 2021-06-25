@@ -4,7 +4,7 @@ import { csrfFetch } from "./csrf";
 const GET_PRODUCTS = "products/GET_PRODUCTS";
 // const GET_PRODUCT = "products/GET_PRODUCT";
 const ADD_PRODUCT = "products/ADD_PRODUCT";
-// const UPDATE_PRODUCT = "products/EDIT_PRODUCT";
+const UPDATE_PRODUCT = "products/EDIT_PRODUCT";
 // const DELETE_PRODUCT = "products/DELETE_PRODUCT";
 
 //TODO Define Action Creators
@@ -29,12 +29,12 @@ const addProduct = (product) => {
 	}
 };
 
-// const updateProduct = (product) => {
-// 	return {
-// 		type: UPDATE_PRODUCT,
-// 		payload: product
-// 	}
-// };
+const updateProduct = (product) => {
+	return {
+		type: UPDATE_PRODUCT,
+		payload: product
+	}
+};
 
 // const deleteProduct = (product) => {
 // 	return {
@@ -68,7 +68,7 @@ export const setProducts = () => async (dispatch) => {
 
 // //! ADD A PRODUCT
 export const newProduct = (product) => async (dispatch) => {
-	const { title, imageUrl, productUrl, description } = product;
+	const { ownerId, title, imageUrl, productUrl, description } = product;
 
 	const response = await csrfFetch(`/api/products/add`, {
 		method: 'POST',
@@ -76,6 +76,7 @@ export const newProduct = (product) => async (dispatch) => {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
+			ownerId,
 			title,
 			imageUrl,
 			productUrl,
@@ -89,27 +90,28 @@ export const newProduct = (product) => async (dispatch) => {
 };
 
 // //! UPDATE A PRODUCT
-// export const editProduct = (product) => async (dispatch) => {
-// 	const { title, imageUrl, productUrl, description } = product;
-// 	const response = await csrfFetch(`/api/products/update/${product.id}`, {
-// 		method: 'PUT',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 		body: JSON.stringify({
-// 			title,
-// 			imageUrl,
-// 			productUrl,
-// 			description
-// 		})
-// 	});
+export const editProduct = (product) => async (dispatch) => {
+	const { ownerId, title, imageUrl, productUrl, description } = product;
+	const response = await csrfFetch(`/api/products/update/${product.id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			ownerId,
+			title,
+			imageUrl,
+			productUrl,
+			description
+		})
+	});
 
-// 	if (response.ok) {
-// 		const data = await response.json();
-// 		dispatch(updateProduct(product));
-// 		return data;
-// 	}
-// };
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(updateProduct(product));
+		return data;
+	}
+};
 
 // //! DELETE A PRODUCT
 // export const removeProduct = (product) => async (dispatch) => {

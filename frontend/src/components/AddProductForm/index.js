@@ -1,33 +1,37 @@
 // frontend/src/components/AddProductForm/index.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // import css
 import { newProduct } from "../../store/products"
 // import * as sessionActions from "../../store/session";
 
 function AddProductForm() {
+	const history = useHistory();
   const dispatch = useDispatch();
-	// const sessionUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 	const [title, setTitle] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [productUrl, setProductUrl] = useState('');
 	const [description, setDescription] = useState('');
   // const [errors, setErrors] = useState([]);
 
-  // if (sessionUser) return <Redirect to="/" />;
+  // if (sessionUser) return <Redirect to="/">;
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// setErrors([]);
-		return dispatch(
+		await dispatch(
 			newProduct({
+				ownerId: sessionUser.id,
 				title,
 				imageUrl,
 				productUrl,
 				description
 			})
 		)
+
+		history.push('/');
 		// 	.catch(async (res) => {
 		// 	const data = await res.json();
 		// 	if (data && data.errors) setErrors(data.errors);
@@ -35,7 +39,6 @@ function AddProductForm() {
 	};
 
 	return (
-		<div>
 			<form onSubmit={handleSubmit}>
 				<h3>Add A Product</h3>
 				<h5>(ALL FIELDS REQUIRED!)</h5>
@@ -80,7 +83,6 @@ function AddProductForm() {
 				</label>
 				<button type="submit">Add Product</button>
 			</form>
-		</div>
   );
 }
 
