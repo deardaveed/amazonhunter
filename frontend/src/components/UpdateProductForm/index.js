@@ -10,13 +10,14 @@ function UpdateProductForm() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { id } = useParams();
+
+	const sessionUser = useSelector((state) => state.session.user);
+
 	const [title, setTitle] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [productUrl, setProductUrl] = useState('');
 	const [description, setDescription] = useState('');
   // const [errors, setErrors] = useState([]);
-
-	const sessionUser = useSelector((state) => state.session.user);
 
   // if (sessionUser) return <Redirect to="/">;
 	useEffect(() => {
