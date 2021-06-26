@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 //TODO Define Action Types as Constants
 const GET_PRODUCTS = "products/GET_PRODUCTS";
-// const GET_PRODUCT = "products/GET_PRODUCT";
+const GET_PRODUCT = "products/GET_PRODUCT";
 const ADD_PRODUCT = "products/ADD_PRODUCT";
 const UPDATE_PRODUCT = "products/EDIT_PRODUCT";
 // const DELETE_PRODUCT = "products/DELETE_PRODUCT";
@@ -15,12 +15,12 @@ const getProducts = (products) => {
 	}
 };
 
-// const getProduct = (product) => {
-// 	return {
-// 		type: GET_PRODUCT,
-// 		payload: product
-// 	}
-// };
+const getProduct = (product) => {
+	return {
+		type: GET_PRODUCT,
+		payload: product
+	}
+};
 
 const addProduct = (product) => {
 	return {
@@ -56,15 +56,15 @@ export const setProducts = () => async (dispatch) => {
 };
 
 // //! GET SINGLE PRODUCT
-// export const setProduct = (id) => async (dispatch) => {
-// 	const response = await csrfFetch(`/api/products/${id}`);
-// 	const product = await response.json();
+export const setProduct = (id) => async (dispatch) => {
+	const response = await csrfFetch(`/api/products/${id}`);
+	const product = await response.json();
 
-// 	if (response.ok) {
-// 		console.log('*****product (singular)*****', product);
-// 		dispatch(getProduct(product));
-// 	}
-// };
+	if (response.ok) {
+		console.log('*****product (singular)*****', product);
+		dispatch(getProduct(product));
+	}
+};
 
 // //! ADD A PRODUCT
 export const newProduct = (product) => async (dispatch) => {
