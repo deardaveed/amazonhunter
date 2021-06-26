@@ -7,8 +7,8 @@ import { setProduct, editProduct } from "../../store/products"
 // import * as sessionActions from "../../store/session";
 
 function UpdateProductForm() {
-	const history = useHistory();
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const { id } = useParams();
 
 	const sessionUser = useSelector((state) => state.session.user);
@@ -87,7 +87,7 @@ function UpdateProductForm() {
 						required
 					/>
 				</label>
-				<button type="submit">Add Product</button>
+				<button type="submit">Update Product</button>
 			</form>
   );
 }
