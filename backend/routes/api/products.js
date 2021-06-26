@@ -24,36 +24,38 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 }));
 
 //! add new product to database
-// router.post('/add', asyncHandler(async (req, res) => {
-// 	const { title, imageUrl, productUrl, description } = req.body;
+router.post('/add', asyncHandler(async (req, res) => {
+	const { ownerId, title, imageUrl, productUrl, description } = req.body;
 
-// 	const product = await Product.create({
-// 		title,
-// 		imageUrl,
-// 		productUrl,
-// 		description
-// 	});
+	const product = await Product.create({
+		ownerId,
+		title,
+		imageUrl,
+		productUrl,
+		description
+	});
 
-// 	return res.json(product);
-// }));
+	return res.json(product);
+}));
 
 //! update a specific product
-// router.put('/update/:id(\\d+)', asyncHandler(async (req, res) => {
-// 	const productId = +(req.params.id);
-// 	const { title, imageUrl, productUrl, description } = req.body;
-// 	const product = await Product.findOne({
-// 		where: { id: productId }
-// 	});
+router.put('/update/:id(\\d+)', asyncHandler(async (req, res) => {
+	const productId = +(req.params.id); //! in lieu of parseInt() or Number()
+	const { ownerId, title, imageUrl, productUrl, description } = req.body;
+	const product = await Product.findOne({
+		where: { id: productId }
+	});
 
-// 	await product.update({
-// 		title,
-// 		imageUrl,
-// 		productUrl,
-// 		description
-// 	})
+	await product.update({
+		ownerId,
+		title,
+		imageUrl,
+		productUrl,
+		description
+	})
 
-// 	return res.json(product)
-// }));
+	return res.json(product)
+}));
 
 //! delete a specific product
 // router.delete('delete/:id(\\d)', asyncHandler(async (req, res) => {
