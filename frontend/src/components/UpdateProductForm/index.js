@@ -21,7 +21,7 @@ function UpdateProductForm() {
 
   // if (sessionUser) return <Redirect to="/">;
 	useEffect(() => {
-		dispatch(setProduct(+id)); //! is parseInt conversion needed here?
+		dispatch(setProduct(id)); //! is parseInt conversion needed here?
 	}, [dispatch, id]); //! is parseInt conversion needed here?
 
 	const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ function UpdateProductForm() {
 		// setErrors([]);
 		await dispatch(
 			editProduct({
-				id: +id,	//! test parseInt
+				id,
 				ownerId: sessionUser.id,
 				title,
 				imageUrl,

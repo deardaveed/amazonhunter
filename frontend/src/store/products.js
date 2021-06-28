@@ -5,7 +5,7 @@ const GET_PRODUCTS = "products/GET_PRODUCTS";
 const GET_PRODUCT = "products/GET_PRODUCT";
 const ADD_PRODUCT = "products/ADD_PRODUCT";
 const UPDATE_PRODUCT = "products/EDIT_PRODUCT";
-// const DELETE_PRODUCT = "products/DELETE_PRODUCT";
+const DELETE_PRODUCT = "products/DELETE_PRODUCT";
 
 //TODO Define Action Creators
 const getProducts = (products) => {
@@ -36,12 +36,12 @@ const updateProduct = (product) => {
 	}
 };
 
-// const deleteProduct = (product) => {
-// 	return {
-// 		type: DELETE_PRODUCT,
-// 		payload: product,
-// 	}
-// };
+const deleteProduct = (product) => {
+	return {
+		type: DELETE_PRODUCT,
+		payload: product,
+	}
+};
 
 //TODO Define Thunks
 //! GET ALL PRODUCTS
@@ -86,7 +86,7 @@ export const newProduct = (product) => async (dispatch) => {
 
 	const data = await response.json();
 	dispatch(addProduct(data));
-	return response;
+	// return data; //! would this line be redundant?
 };
 
 // //! UPDATE A PRODUCT
@@ -108,23 +108,30 @@ export const editProduct = (product) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
-		dispatch(updateProduct(product));
-		return data;
+		dispatch(updateProduct(data));
+		// return data; //! would this line be redundant?
 	}
 };
 
-// //! DELETE A PRODUCT
-// export const removeProduct = (product) => async (dispatch) => {
-// 	const response = await csrfFetch(`/api/products/delete/${product.id}`, {
-// 		method: 'DELETE',
-// 		body: JSON.stringify({
-// 			product
-// 		})
-// 	});
+//! DELETE A PRODUCT
+export const removeProduct = (product) => async (dispatch) => {
+	const { productId } = product;
+	const response = await csrfFetch(`/api/products/delete/${productId}`, {
+		method: 'DELETE',
+		// headers: {
+		// 	'Content-Type': 'application/json',
+		// },
+		// body: JSON.stringify({
+		// 	product
+		// })
+	});
 
-// 	dispatch(deleteProduct(product));
-// 	return response;
-// };
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(deleteProduct(data));
+		// return response; //! would this line be redundant?
+	}
+};
 
 //TODO Define an initial state
 const initialState = {};
@@ -133,43 +140,48 @@ const initialState = {};
 const productsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_PRODUCTS:
-			const allProducts = {};
+			const newState = {};
 			// console.log("******REDUCER*****", action.payload);
 			action.payload.forEach((product) => {
-				allProducts[product.id] = product;
+				newState[product.id] = product;
 			});
 
 			return {
 				...state,
-				...allProducts
+				...newState
 			};
 
-		// case GET_PRODUCT:
+		case GET_PRODUCT: {
+			const newState = {};
+			newState[action.payload.id] = action.payload;
+			return newState;
+		}
 
-		// 	return {
+		case ADD_PRODUCT :{
+			const newState = { ...state };
+			newState[action.payload.id] = action.payload;
+			return newState;
+		}
 
-		// 	};
+		case UPDATE_PRODUCT: {
+			const newState = {};
+			newState[action.payload.id] = action.payload;
 
-		// case ADD_PRODUCT:
+			return {
+				...state,
+				...newState
+			}
+		}
 
-		// 	return {
+		case DELETE_PRODUCT: {
+			const newState = { ...state };
+			delete newState[action.payload.id]
+			return newState;
+		}
 
-		// 	};
-
-		// case UPDATE_PRODUCT:
-
-		// 	return {
-
-		// 	};
-
-		// case DELETE_PRODUCT:
-
-		// 	return {
-
-		// 	};
-
-		default:
+		default: {
 			return state;
+		}
 	}
 };
 
