@@ -16,12 +16,13 @@ function Homepage() {
 
 	return (
 		<div>
+			<img src={`../../../public/logo-orange-f8981d.png`} alt='logo' />
       <table>
 				<tbody>
 					<tr>
 						{products.map((product) => {
 							return <div key={`${product.id}`}>{product.title}</div>
-						})}
+						})};
 					</tr>
         </tbody>
 			</table>
