@@ -17,7 +17,7 @@ router.get('/', asyncHandler(async (req, res) => {
 // grab one DB entry for a single product
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 	// res.send("Hello from /:id")
-	const productId  = +(req.params.id); //convert str to int, in lieu of parseInt() or Number()
+	const productId  = (+req.params.id); //convert str to int, in lieu of parseInt() or Number()
 	// productId = +productId;
 	const product = await Product.findByPk(productId) //! Did we need parseInt(id, 10) here?
 	return res.json(product);		//left optional explicit return for readability
@@ -40,7 +40,7 @@ router.post('/add', asyncHandler(async (req, res) => {
 
 //! update a specific product
 router.put('/update/:id(\\d+)', asyncHandler(async (req, res) => {
-	const productId = +(req.params.id); //! in lieu of parseInt() or Number()
+	const productId = (+req.params.id); //! in lieu of parseInt() or Number()
 	const { ownerId, title, imageUrl, productUrl, description } = req.body;
 	const product = await Product.findOne({
 		where: { id: productId }
@@ -54,15 +54,20 @@ router.put('/update/:id(\\d+)', asyncHandler(async (req, res) => {
 		description
 	})
 
-	return res.json(product)
+	return res.json(product);
 }));
 
-//! delete a specific product
-// router.delete('delete/:id(\\d)', asyncHandler(async (req, res) => {
-// 	const productId = +(req.params.id);
-// 	const product = await Product.findByPk(productId);
+// ! delete a specific product
+router.delete('delete/:id', asyncHandler(async (req, res) => {
+	const productId = (+req.params.id);
+	// console.log("Hello from /delete/:id")
+	// const productId = +(req.params.id);
+	// console.log("*****productId with +req.params.id", productId);
+	// console.log("*****productId with +parseInt", parseInt(req.params.id, 10));
+	const product = await Product.findByPk(productId);
 
-// 	await product.destroy();
-// })
-
+	await product.destroy();
+	return res.json({ testing: "is delete route working?"});
+	})
+);
 module.exports = router;

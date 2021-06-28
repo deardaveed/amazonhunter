@@ -7,20 +7,21 @@ import { setProduct, editProduct } from "../../store/products"
 // import * as sessionActions from "../../store/session";
 
 function UpdateProductForm() {
-	const history = useHistory();
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const { id } = useParams();
+
+	const sessionUser = useSelector((state) => state.session.user);
+
 	const [title, setTitle] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [productUrl, setProductUrl] = useState('');
 	const [description, setDescription] = useState('');
   // const [errors, setErrors] = useState([]);
 
-	const sessionUser = useSelector((state) => state.session.user);
-
   // if (sessionUser) return <Redirect to="/">;
 	useEffect(() => {
-		dispatch(setProduct(+id)); //! is parseInt conversion needed here?
+		dispatch(setProduct(id)); //! is parseInt conversion needed here?
 	}, [dispatch, id]); //! is parseInt conversion needed here?
 
 	const handleSubmit = async (e) => {
@@ -28,7 +29,7 @@ function UpdateProductForm() {
 		// setErrors([]);
 		await dispatch(
 			editProduct({
-				id: +id,	//! test parseInt
+				id,
 				ownerId: sessionUser.id,
 				title,
 				imageUrl,
@@ -86,7 +87,7 @@ function UpdateProductForm() {
 						required
 					/>
 				</label>
-				<button type="submit">Add Product</button>
+				<button type="submit">Update Product</button>
 			</form>
   );
 }

@@ -7,8 +7,10 @@ import Homepage from "./components/Homepage";
 import SignupFormPage from "./components/SignupFormPage";
 import AddProductForm from "./components/AddProductForm";
 import UpdateProductForm from "./components/UpdateProductForm";
-import * as sessionActions from "./store/session";
+import DeleteProductForm from "./components/DeleteProductForm";
 import Navigation from "./components/Navigation";
+// import ProductDetails from "./components/ProductDetails"
+import * as sessionActions from "./store/session";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
+				<Switch>
           <Route path="/" exact>
 						<Homepage />
           </Route>
@@ -30,11 +32,16 @@ function App() {
 					</Route>
 					<Route path="/products/add">
 						<AddProductForm />
-          </Route>
+					</Route>
+					{/* <Route path="/products/:id">
+						<ProductDetails />
+					</Route> */}
 					<Route path="/products/update/:id">
 						<UpdateProductForm />
 					</Route>
-
+					<Route path="/products/delete/:id">
+						<DeleteProductForm />
+					</Route>
         </Switch>
       )}
     </>
