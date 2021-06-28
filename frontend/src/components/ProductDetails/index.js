@@ -19,13 +19,14 @@ function ProductDetails() {
       <table>
 				<tbody>
 					<tr>
-						return {<div key={`${product.id}`}>{product.title}, {product.imageUrl}</div>
-						}
+						{/* return {
+							<div key={`${product.id}`}>{product.title}</div>
+						} */}
 					</tr>
         </tbody>
 			</table>
 		</div>
-	);
+	)
 };
 
 export default ProductDetails;
