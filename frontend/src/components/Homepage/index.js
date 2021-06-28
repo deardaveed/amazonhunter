@@ -15,14 +15,16 @@ function Homepage() {
 	}, [dispatch]);
 
 	return (
-		<div>
-			<img src={`../../../public/logo-orange-f8981d.png`} alt='logo' />
+		<div style={{backgroundColor: '#7DB0A8'}}>
+			<img src={process.env.PUBLIC_URL + '/logo-orange-f8981d.png'} alt='logo-orange' />
+			<img src={process.env.PUBLIC_URL + '/logo-white.png'} alt='logo-white' />
+			<img src={process.env.PUBLIC_URL + '/logo-black.png'} alt='logo-black' />
       <table>
 				<tbody>
 					<tr>
 						{products.map((product) => {
 							return <div key={`${product.id}`}>{product.title}</div>
-						})};
+						})}
 					</tr>
         </tbody>
 			</table>
