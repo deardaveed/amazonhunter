@@ -1,4 +1,7 @@
-# AmazonHunter 🤠 🏹
+# AmazonHunter
+![Alt logo](https://i.imgur.com/0Vn1LER.png)
+![Alt logo](https://i.imgur.com/QHseJ8C.png)
+![Alt logo](https://i.imgur.com/JMWwhBi.png)
 
 ## Navigation Links
 [Wiki Page Home](https://github.com/deardaveed/w16-solo-project/wiki)
